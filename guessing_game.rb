@@ -4,6 +4,8 @@
 # Need to display an appropriate message after evaluating
 # Need to either reprompt, announce victory, or announce defeat
 
+# Adventure Mode! now I must keep track of previous
+# guesses so that I can compare new ones
 
 def prompt_for_guess
   print "Please guess a number: "
@@ -23,9 +25,19 @@ our_number = rng.rand(100)
 puts "Try to guess my number.  It is between 1 and 100"
 count = 0
 
+# I'll add an array to store the guesses
+guesses = []
+
 # Time to begin guessing
 loop do
-  result = evaluate_guess(prompt_for_guess, our_number)
+  # I need to use the guess in two places now so I will
+  # stick it in a variable
+  guess = prompt_for_guess
+  guesses << guess
+  if guesses.count(guess) > 1
+    puts "That's still not right!"
+  end
+  result = evaluate_guess(guess, our_number)
   # I'll check for victory first because it can stop the loop earliest
   if result == 0
     puts "Victory!"
