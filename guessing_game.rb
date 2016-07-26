@@ -10,9 +10,11 @@ def prompt_for_guess
   guess = gets.chomp.to_i
 end
 
+def evaluate_guess(guess, our_number)
+  guess <=> our_number
+end
+
 # Let's get a RNG
 rng = Random.new
 # Now we generate a number between 1-100 and put it in our_number
 our_number = rng.rand(100)
-
-puts prompt_for_guess
