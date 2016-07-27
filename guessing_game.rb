@@ -83,10 +83,14 @@ class ComputerGame
 
   def apply_hint(hint)
     if hint == "higher"
-      @low = @guess
+      @low = @guess + 1
     elsif hint == "lower"
-      @high = @guess
+      @high = @guess - 1
     end
+  end
+
+  def lying?
+    @low > @high
   end
 
   def play
@@ -101,6 +105,10 @@ class ComputerGame
         break
       else
         apply_hint(hint)
+        if lying?
+          puts "Preposterous! Come back when you can play fair"
+          break
+        end
         make_a_guess
         count += 1
       end
