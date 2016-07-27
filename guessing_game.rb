@@ -6,7 +6,7 @@
 # and I will compare the new guess with respect to the
 # higher or lower message
 
-class Game
+class HumanGame
   # Game needs a target number and a list of guesses
   def initialize
     @target = Random.new.rand(100)
@@ -60,4 +60,58 @@ class Game
   end
 end
 
-Game.new.play
+# For Mega mode I must implement a new prompt that lets
+# the user tell the computer if their guess is low or high
+# I want the computer to be smart so I will use a binary search to
+# determine guesses.  The computer will inform the user they are lying
+# if their feedback doesn't make sense.
+class ComputerGame
+  def initialize
+    @high = 100
+    @low = 1
+    @guess = 50
+  end
+
+  def make_a_guess
+    @guess = (@high + @low)/2
+  end
+
+  def prompt_for_hint
+    puts "Please say if I should guess *higher* *lower* or if I am *correct*"
+    hint = gets.chomp
+  end
+
+  def apply_hint(hint)
+    if hint == "higher"
+      @low = @guess
+    elsif hint == "lower"
+      @high = @guess
+    end
+  end
+
+  def play
+    puts "Ok, think of a number between 1 and 100"
+    puts "Tell me \"higher\", \"lower\", or \"correct\" to indicate my guess was too low, too high, or correct respectively"
+    count = 0
+    loop do
+      puts "My guess is #{@guess}"
+      hint = prompt_for_hint
+      if hint == "correct"
+        puts "Hurray for me!"
+        break
+      else
+        apply_hint(hint)
+        make_a_guess
+        count += 1
+      end
+      if count == 5
+        puts "I lose, well played"
+        break
+      end
+    end
+  end
+end
+
+
+# HumanGame.new.play
+ComputerGame.new.play
