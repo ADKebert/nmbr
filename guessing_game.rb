@@ -69,7 +69,7 @@ class ComputerGame
   def initialize
     @high = 100
     @low = 1
-    @guess = 50
+    @guess = Random.new.rand(100)
   end
 
   def make_a_guess
@@ -120,6 +120,10 @@ class ComputerGame
   end
 end
 
-
-# HumanGame.new.play
-ComputerGame.new.play
+puts "Who should do the guessing?"
+puts "Type \"me\" or \"computer\""
+if gets.chomp == "me"
+  HumanGame.new.play
+else
+  ComputerGame.new.play
+end
