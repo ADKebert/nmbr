@@ -73,7 +73,7 @@ class ComputerGame
   end
 
   def make_a_guess
-    @guess = (@high + @low)/2
+    @guess = (@high + @low) / 2
   end
 
   def prompt_for_hint
