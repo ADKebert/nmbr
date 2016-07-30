@@ -39,13 +39,22 @@ class HumanGame
       if @guesses.count(@guesses[-1]) > 1
         puts "That's still not right!"
       end
-      result = evaluate_guess(@guesses[-1])
-      if result == 0
+      result = evaluate_guess(@guesses.last)
+      # if result == 0
+      #   puts "Victory!"
+      #   break
+      # end
+      # check_guess
+      # if result == -1
+      #   puts "Higher!"
+      # else
+      #   puts "Lower!"
+      # end
+      case result
+      when 0
         puts "Victory!"
         break
-      end
-      check_guess
-      if result == -1
+      when -1
         puts "Higher!"
       else
         puts "Lower!"
